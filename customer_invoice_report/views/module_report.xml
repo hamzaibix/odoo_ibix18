@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="invoice_order">
+			<t t-call="web.html_container">
+				<t t-call="customer_invoice_report.external_layout_custom_customer">
+					<meta charset="UTF-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+					<t t-foreach="docs" t-as="o">
+						<div class="page">
+                            <style type="text/css">
+                            .container {
+                                width: 100%;
+                                margin: 0px auto;
+                                padding: 10px;
+                            }
+
+                            .header {
+                                text-align: center;
+                                font-size: 20px;
+                                font-weight: bold;
+                                float: left;
+                            }
+
+                            .section {
+                                margin-top: 20px;
+                            }
+                            .section2 {
+                                margin-top: 100px;
+                            }
+
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                            }
+
+                            table,
+                            th,
+                            td {
+                                border: 1px solid black;
+                                padding: 8px;
+                                text-align: left;
+                            }
+
+                            .main_div {
+                                width: 100%;
+                                margin-top: 25px;
+                            }
+
+                            .footers_div {
+                                width: 100%;
+                            }
+                            .floatleft_div {
+                                width: 50%;
+                                float: left;
+                            }
+                            .floatright_div {
+                                width: 50%;
+                                float: left;
+                            }
+                            .left_div_2 table {
+                                height: 100px;
+                            }
+
+                            .left_div_2 {
+                                width: 29%;
+                                float: left;
+                            }
+
+                            .right_div_2 {
+                                width: 30%;
+                                float: left;
+                                margin-left: 45px;
+                            }
+
+                            .center_div {
+                                width: 29%;
+                                float: left;
+                                margin-left: 45px;
+                            }
+                            </style>
+							<link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&amp;display=swap" rel="stylesheet">
+
+								<br></br>
+								<br></br>
+<!--								<br></br>-->
+								<div style="font-family: Arial, sans-serif; width: 700px; margin: auto; border: 1px solid #ccc; padding: 20px;">
+									<h2 style="text-align: center; font-weight: bold;">INVOICE فاتورة</h2>
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; font-family: Arial, sans-serif; font-size: 13px;">
+                                        <div class="row">
+                                        <!-- Left: English Info -->
+                                            <div style="width: 48%; text-align: left; ">
+                                                <strong>Invoice to:</strong><br></br>
+                                                <span style="margin-left: 5px; font-weight: bold;"><t t-esc="o.partner_id.name"/></span><br/>
+                                                <t t-esc="o.partner_id.city"/>, <t t-esc="o.partner_id.country_id.name"/><br/>
+                                                <strong>VAT:</strong>
+                                                <span><t t-esc="o.partner_id.vat"/></span>
+                                            </div>
+
+                                            <!-- Right: Arabic Info -->
+                                            <div style="width: 48%; text-align: right; direction: rtl;">
+                                                <strong>فاتورة إلى:</strong><br></br>
+                                                <span style="margin-right: 5px;font-weight: bold;"><t t-esc="o.partner_id.arabic_name1"/></span><br/>
+                                                <t t-esc="o.partner_id.arabic_address1"/><br/>
+                                                <strong>الرقم الضريبي:</strong>
+                                                <span><t t-esc="o.partner_id.vat"/></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+									<table width="100%" style="border: 1px solid black; border-collapse: collapse; ">
+										<tr>
+											<th style="border: 1px solid black; padding: 10px;">Invoice No.</th>
+											<td style="border: 1px solid black; padding: 8px;"><t t-esc="o.name"/></td>
+											<td style=" font-weight: bold; direction: rtl; text-align: right;">الفاتورةرق</td>
+										</tr>
+										<tr>
+											<th style="border: 1px solid black; padding: 10px;">Total Amount with VAT</th>
+											<td style="border: 1px solid black; padding: 8px;">SAR <t t-esc="'{:,.2f}'.format(o.amount_total)"/></td>
+											<td style=" font-weight: bold; direction: rtl; text-align: right;">إجمالي مبلغ أمر الشراء مع ضريبة
+											</td>
+										</tr>
+<!--										<tr>-->
+<!--											<th style="border: 1px solid black; padding: 10px;">Amount Due with VAT <t t-esc="str(o.x_invoice_reference) + '%'"/></th>-->
+<!--											<td style="border: 1px solid black; padding: 8px; font-weight: bold;">SAR <t t-esc="'{:,.2f}'.format((o.amount_total * float(o.x_invoice_reference or 0))/100)"/></td>-->
+<!--											<td style="font-weight: bold; direction: rtl; text-align: right;">-->
+<!--												مع ضريبة القيمة المضافة بالريال السعودي-->
+<!--											</td>-->
+<!--										</tr>-->
+<!--                                        <tr>-->
+<!--                                            <th style="border: 1px solid black; padding: 10px;">-->
+<!--                                                Remaining Amount Due with VAT-->
+<!--                                                <t t-esc="str(100 - float(o.x_invoice_reference or 0)) + '%'"/>-->
+<!--                                            </th>-->
+<!--                                            <td style="border: 1px solid black; padding: 8px; font-weight: bold;">-->
+<!--                                                SAR <t t-esc="'{:,.2f}'.format(o.amount_total - ((o.amount_total * float(o.x_invoice_reference or 0)) / 100))"/>-->
+<!--                                            </td>-->
+<!--                                            <td style="font-weight: bold; direction: rtl; text-align: right;">-->
+<!--                                                مع ضريبة القيمة المضافة بالريال السعودي-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+
+									</table>
+									<br></br>
+<!--									<br></br>-->
+									<h5 style="font-weight: bold;">Order Details:</h5>
+									<table style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+                                        <thead>
+                                            <tr style="background: #f0f0f0;">
+                                                <th style="border: 1px solid black; padding: 10px;">Product Descriptions</th>
+                                                <th style="border: 1px solid black; padding: 10px;">Qty</th>
+                                                <th style="border: 1px solid black; padding: 10px;">Total Price (SAR)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="o.invoice_line_ids" t-as="line">
+                                                <td style="border: 1px solid black; padding: 8px;"><t t-esc="line.name"/></td>
+                                                <td style="border: 1px solid black; padding: 8px; text-align:center;"><t t-esc="line.quantity"/></td>
+                                                <td style="border: 1px solid black; padding: 8px; text-align:right;"><t t-esc="'{:,.2f}'.format(line.price_total)"/></td>
+                                            </tr>
+
+                                            <!-- Subtotal without VAT -->
+                                            <tr>
+                                                <td colspan="2" style="text-align:right; border: 1px solid black; padding: 8px; font-weight: bold;">Subtotal without VAT</td>
+                                                <td style="border: 1px solid black; padding: 8px; text-align:right;">
+                                                    <t t-esc="'{:,.2f}'.format(o.amount_untaxed)"/>
+                                                </td>
+                                            </tr>
+
+                                            <!-- VAT at 15% -->
+                                            <tr>
+                                                <td colspan="2" style="text-align:right; border: 1px solid black; padding: 8px; font-weight: bold;">VAT at 15%</td>
+                                                <td style="border: 1px solid black; padding: 8px; text-align:right;">
+                                                    <t t-esc="'{:,.2f}'.format(o.amount_tax)"/>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Grand Total -->
+                                            <tr>
+                                                <td colspan="2" style="text-align:right; border: 1px solid black; padding: 8px; font-weight: bold;">Grand Total including VAT</td>
+                                                <td style="border: 1px solid black; padding: 8px; text-align:right; font-weight:bold;">
+                                                    <t t-esc="'{:,.2f}'.format(o.amount_total)"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                    <div class="row" style="width:100%; margin-top: 30px; display: flex; justify-content: space-between;  font-family: Arial, sans-serif; font-size: 13px;">
+                                        <!-- Left Side: Payment Info (with border box) -->
+                                        <div style="width:48%; border:1px solid black; padding:10px; border-radius:5px; font-size=13 px;">
+                                            <h4 style="margin: 0 0 5px 0;">Payment Transfer Information:</h4>
+                                            <p style="margin: 0; font-size: 13px; line-height: 1.5;">
+                                                Account Name: مؤسسة سبعة السماء لتقنية نظم المعلومات<br/>
+                                                IBAN No.: SA8010000001400003110801<br/>
+                                                Account No.: 01400003110801<br/>
+                                                Bank Name: NCB Bank
+                                            </p>
+                                        </div>
+
+                                        <!-- Right Side: Commercial Terms (no box) -->
+                                        <div style="width:48%; padding-left:10px;">
+                                            <h4 style="margin: 0 0 5px 0;">Commercial Terms:</h4>
+                                            <p style="margin: 0; font-size: 13px; line-height: 1.5;">
+                                                First Payment: 30%<br/>
+                                                After 2 months: 40%<br/>
+                                                Project Go-Live: 30%
+                                            </p>
+                                        </div>
+                                    </div>
+<!--                                    <div style="width:100%; text-align:center; margin-top:15px;">-->
+<!--                                        <img t-attf-src="data:image/png;base64,{{o.l10n_sa_qr_code}}" style="display:inline-block; width:120px; height:120px; margin:0 auto;" />-->
+<!--&lt;!&ndash;                                        <img style="max-width:200px; max-height:200px;" t-attf-src="data:image/png;base64, {{o.zatca_qr_image}}"/>&ndash;&gt;-->
+<!--                                    </div>-->
+                                    <t t-if="o.zatca_qr_image">
+                                        <div style="width:100%; text-align:center; margin-top:15px;">
+                                            <img t-att-src="'data:image/png;base64,%s' % o.zatca_qr_image.decode()"
+                                                 style="display:inline-block; width:120px; height:120px; margin:0 auto;" />
+                                        </div>
+                                    </t>
+
+
+
+
+<!--									<div>-->
+<!--										<p style="white-space: pre-line; margin-top: 15px;">-->
+<!--											<t t-esc="o.narration"/>-->
+<!--										</p>-->
+<!--									</div>-->
+<!--									<br></br>-->
+									<div style="width: 100%; overflow: hidden; margin-top: 20px;">
+										<div style="width: 50%; float: left;">
+											<strong style="text-decoration: overline;">Finance Department.</strong>
+										</div>
+										<div style="width: 50%; float: right; text-align: right;">
+											<strong style="text-decoration: overline;">Name And Signature.</strong>
+										</div>
+									</div>
+
+								</div>
+							</link>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+        <template id="invoice_installment_order">
+			<t t-call="web.html_container">
+				<t t-call="customer_invoice_report.external_layout_custom_customer">
+					<meta charset="UTF-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+					<t t-foreach="docs" t-as="o">
+						<div class="page">
+                            <style type="text/css">
+                            .container {
+                                width: 100%;
+                                margin: 0px auto;
+                                padding: 10px;
+                            }
+
+                            .header {
+                                text-align: center;
+                                font-size: 20px;
+                                font-weight: bold;
+                                float: left;
+                            }
+
+                            .section {
+                                margin-top: 20px;
+                            }
+                            .section2 {
+                                margin-top: 100px;
+                            }
+
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                            }
+
+                            table,
+                            th,
+                            td {
+                                border: 1px solid black;
+                                padding: 8px;
+                                text-align: left;
+                            }
+
+                            .main_div {
+                                width: 100%;
+                                margin-top: 25px;
+                            }
+
+                            .footers_div {
+                                width: 100%;
+                            }
+                            .floatleft_div {
+                                width: 50%;
+                                float: left;
+                            }
+                            .floatright_div {
+                                width: 50%;
+                                float: left;
+                            }
+                            .left_div_2 table {
+                                height: 100px;
+                            }
+
+                            .left_div_2 {
+                                width: 29%;
+                                float: left;
+                            }
+
+                            .right_div_2 {
+                                width: 30%;
+                                float: left;
+                                margin-left: 45px;
+                            }
+
+                            .center_div {
+                                width: 29%;
+                                float: left;
+                                margin-left: 45px;
+                            }
+                            </style>
+							<link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&amp;display=swap" rel="stylesheet">
+
+								<br></br>
+								<br></br>
+<!--								<br></br>-->
+								<div style="font-family: Arial, sans-serif; width: 700px; margin: auto; border: 1px solid #ccc; padding: 20px;">
+									<h2 style="text-align: center; font-weight: bold;">INVOICE فاتورة</h2>
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; font-family: Arial, sans-serif; font-size: 13px;">
+                                        <div class="row">
+                                        <!-- Left: English Info -->
+                                            <div style="width: 48%; text-align: left; ">
+                                                <strong>Invoice to:</strong><br></br>
+                                                <span style="margin-left: 5px; font-weight: bold;"><t t-esc="o.partner_id.name"/></span><br/>
+                                                <t t-esc="o.partner_id.city"/>, <t t-esc="o.partner_id.country_id.name"/><br/>
+                                                <strong>VAT:</strong>
+                                                <span><t t-esc="o.partner_id.vat"/></span>
+                                            </div>
+
+                                            <!-- Right: Arabic Info -->
+                                            <div style="width: 48%; text-align: right; direction: rtl;">
+                                                <strong>فاتورة إلى:</strong><br></br>
+                                                <span style="margin-right: 5px;font-weight: bold;"><t t-esc="o.partner_id.arabic_name"/></span><br/>
+                                                <t t-esc="o.partner_id.arabic_address"/><br/>
+                                                <strong>الرقم الضريبي:</strong>
+                                                <span><t t-esc="o.partner_id.vat"/></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+									<table width="100%" style="border: 1px solid black; border-collapse: collapse; ">
+										<tr>
+											<th style="border: 1px solid black; padding: 10px;">Invoice No.</th>
+											<td style="border: 1px solid black; padding: 8px;"><t t-esc="o.name"/></td>
+											<td style=" font-weight: bold; direction: rtl; text-align: right;">الفاتورةرق</td>
+										</tr>
+										<tr>
+											<th style="border: 1px solid black; padding: 10px;">Total Amount with VAT</th>
+											<td style="border: 1px solid black; padding: 8px;">SAR <t t-esc="'{:,.2f}'.format(o.amount_total)"/></td>
+											<td style=" font-weight: bold; direction: rtl; text-align: right;">إجمالي مبلغ أمر الشراء مع ضريبة
+											</td>
+										</tr>
+										<tr>
+											<th style="border: 1px solid black; padding: 10px;">Amount Due with VAT <t t-esc="str(o.x_invoice_reference) + '%'"/></th>
+											<td style="border: 1px solid black; padding: 8px; font-weight: bold;">SAR <t t-esc="'{:,.2f}'.format((o.amount_total * float(o.x_invoice_reference or 0))/100)"/></td>
+											<td style="font-weight: bold; direction: rtl; text-align: right;">
+												مع ضريبة القيمة المضافة بالريال السعودي
+											</td>
+										</tr>
+                                        <tr>
+                                            <th style="border: 1px solid black; padding: 10px;">
+                                                Remaining Amount Due with VAT
+                                                <t t-esc="str(100 - float(o.x_invoice_reference or 0)) + '%'"/>
+                                            </th>
+                                            <td style="border: 1px solid black; padding: 8px; font-weight: bold;">
+                                                SAR <t t-esc="'{:,.2f}'.format(o.amount_total - ((o.amount_total * float(o.x_invoice_reference or 0)) / 100))"/>
+                                            </td>
+                                            <td style="font-weight: bold; direction: rtl; text-align: right;">
+                                                مع ضريبة القيمة المضافة بالريال السعودي
+                                            </td>
+                                        </tr>
+
+									</table>
+									<br></br>
+<!--									<br></br>-->
+									<h5 style="font-weight: bold;">Order Details:</h5>
+									<table style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+                                        <thead>
+                                            <tr style="background: #f0f0f0;">
+                                                <th style="border: 1px solid black; padding: 10px;">Product Descriptions</th>
+                                                <th style="border: 1px solid black; padding: 10px;">Qty</th>
+                                                <th style="border: 1px solid black; padding: 10px;">Total Price (SAR)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="o.invoice_line_ids" t-as="line">
+                                                <td style="border: 1px solid black; padding: 8px;"><t t-esc="line.name"/></td>
+                                                <td style="border: 1px solid black; padding: 8px; text-align:center;"><t t-esc="line.quantity"/></td>
+                                                <td style="border: 1px solid black; padding: 8px; text-align:right;"><t t-esc="'{:,.2f}'.format(line.price_total)"/></td>
+                                            </tr>
+
+                                            <!-- Subtotal without VAT -->
+                                            <tr>
+                                                <td colspan="2" style="text-align:right; border: 1px solid black; padding: 8px; font-weight: bold;">Subtotal without VAT</td>
+                                                <td style="border: 1px solid black; padding: 8px; text-align:right;">
+                                                    <t t-esc="'{:,.2f}'.format(o.amount_untaxed)"/>
+                                                </td>
+                                            </tr>
+
+                                            <!-- VAT at 15% -->
+                                            <tr>
+                                                <td colspan="2" style="text-align:right; border: 1px solid black; padding: 8px; font-weight: bold;">VAT at 15%</td>
+                                                <td style="border: 1px solid black; padding: 8px; text-align:right;">
+                                                    <t t-esc="'{:,.2f}'.format(o.amount_tax)"/>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Grand Total -->
+                                            <tr>
+                                                <td colspan="2" style="text-align:right; border: 1px solid black; padding: 8px; font-weight: bold;">Grand Total including VAT</td>
+                                                <td style="border: 1px solid black; padding: 8px; text-align:right; font-weight:bold;">
+                                                    <t t-esc="'{:,.2f}'.format(o.amount_total)"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                    <div class="row" style="width:100%; margin-top: 30px; display: flex; justify-content: space-between;  font-family: Arial, sans-serif; font-size: 13px;">
+                                        <!-- Left Side: Payment Info (with border box) -->
+                                        <div style="width:48%; border:1px solid black; padding:10px; border-radius:5px; font-size=13 px;">
+                                            <h4 style="margin: 0 0 5px 0;">Payment Transfer Information:</h4>
+                                            <p style="margin: 0; font-size: 13px; line-height: 1.5;">
+                                                Account Name: مؤسسة سبعة السماء لتقنية نظم المعلومات<br/>
+                                                IBAN No.: SA8010000001400003110801<br/>
+                                                Account No.: 01400003110801<br/>
+                                                Bank Name: NCB Bank
+                                            </p>
+                                        </div>
+
+                                        <!-- Right Side: Commercial Terms (no box) -->
+                                        <div style="width:48%; padding-left:10px;">
+                                            <h4 style="margin: 0 0 5px 0;">Commercial Terms:</h4>
+                                            <p style="margin: 0; font-size: 13px; line-height: 1.5;">
+                                                First Payment: 30%<br/>
+                                                After 2 months: 40%<br/>
+                                                Project Go-Live: 30%
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div style="width:100%; text-align:center; margin-top:15px;">
+                                    </div>
+
+
+
+<!--									<div>-->
+<!--										<p style="white-space: pre-line; margin-top: 15px;">-->
+<!--											<t t-esc="o.narration"/>-->
+<!--										</p>-->
+<!--									</div>-->
+<!--									<br></br>-->
+									<div style="width: 100%; overflow: hidden; margin-top: 20px;">
+										<div style="width: 50%; float: left;">
+											<strong style="text-decoration: overline;">Finance Department.</strong>
+										</div>
+										<div style="width: 50%; float: right; text-align: right;">
+											<strong style="text-decoration: overline;">Name And Signature.</strong>
+										</div>
+									</div>
+
+								</div>
+							</link>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

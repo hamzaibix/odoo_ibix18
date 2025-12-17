@@ -1,0 +1,23 @@
+<odoo>
+    <record id="view_partner_form_inherit_arabic_fields" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.arabic.fields</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Insert Arabic fields in same group as VAT -->
+            <xpath expr="//field[@name='vat']" position="after">
+                <div class="o_row">
+                    <label for="arabic_name1" string="Company Arabic Name"/>
+                    <field name="arabic_name1"/>
+                </div>
+
+                <div class="o_row">
+                    <label for="arabic_address1" string="Company Arabic Address"/>
+                    <field name="arabic_address1"/>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
