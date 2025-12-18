@@ -5,4 +5,4 @@ class ResPartner(models.Model):
 
     arabic_name1 = fields.Char(string="Company Arabic Name")
     arabic_address1 = fields.Char(string="Company Arabic Address")
-    # commercial_registration = fields.Char(string="Commercial Registration")
+    arabic_address2 = fields.Char(string="Company Arabic Address2")

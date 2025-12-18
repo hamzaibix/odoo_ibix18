@@ -16,6 +16,10 @@
                     <label for="arabic_address1" string="Company Arabic Address"/>
                     <field name="arabic_address1"/>
                 </div>
+                <div class="o_row">
+                    <label for="arabic_address2" string="Company Arabic Address2"/>
+                    <field name="arabic_address2"/>
+                </div>
             </xpath>
 
         </field>

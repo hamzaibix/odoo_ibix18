@@ -89,19 +89,40 @@
                                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; font-family: Arial, sans-serif; font-size: 13px;">
                                         <div class="row">
                                         <!-- Left: English Info -->
-                                            <div style="width: 48%; text-align: left; ">
-                                                <strong>Invoice to:</strong><br></br>
-                                                <span style="margin-left: 5px; font-weight: bold;"><t t-esc="o.partner_id.name"/></span><br/>
-                                                <t t-esc="o.partner_id.city"/>, <t t-esc="o.partner_id.country_id.name"/><br/>
+                                            <div style="width: 48%; text-align: left;">
+                                                <strong>Invoice to:</strong><br/>
+
+                                                <!-- Partner Name -->
+                                                <span style="margin-left: 0px; font-weight: bold;">
+                                                    <t t-esc="o.partner_id.name"/>
+                                                </span><br/>
+
+                                                <!-- Address line -->
+                                                <span style="margin-left: 0px;">
+                                                    <t t-if="o.partner_id.street">
+                                                        <t t-esc="o.partner_id.street"/>
+                                                    </t><br/>
+                                                    <t t-if="o.partner_id.street2">
+                                                        <t t-esc="o.partner_id.street2"/>
+                                                    </t>
+                                                </span>
+                                                <!-- City, Country -->
+                                                <t t-esc="o.partner_id.city"/>
+                                                <t t-if="o.partner_id.city and o.partner_id.country_id">  </t><t t-esc="o.partner_id.zip"/><br/>
+                                                <t t-esc="o.partner_id.country_id.name"/><br/>
+
+                                                <!-- VAT -->
                                                 <strong>VAT:</strong>
                                                 <span><t t-esc="o.partner_id.vat"/></span>
                                             </div>
+
 
                                             <!-- Right: Arabic Info -->
                                             <div style="width: 48%; text-align: right; direction: rtl;">
                                                 <strong>فاتورة إلى:</strong><br></br>
                                                 <span style="margin-right: 5px;font-weight: bold;"><t t-esc="o.partner_id.arabic_name1"/></span><br/>
                                                 <t t-esc="o.partner_id.arabic_address1"/><br/>
+                                                <t t-esc="o.partner_id.arabic_address2"/><br/>
                                                 <strong>الرقم الضريبي:</strong>
                                                 <span><t t-esc="o.partner_id.vat"/></span>
                                             </div>
